@@ -1,6 +1,3 @@
-name = "primsa-at-adge-function"
+name = "prisma-at-edge-function"
 main = "src/index.ts"
 compatibility_date = "2022-09-04"
-
-[vars]
-DATABASE_URL= "changeme"
