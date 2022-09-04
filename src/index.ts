@@ -8,23 +8,34 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { PrismaClient } from "@prisma/client/edge";
+
+const prisma = new PrismaClient();
+
 export interface Env {
-	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-	// MY_KV_NAMESPACE: KVNamespace;
-	//
-	// Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
-	// MY_DURABLE_OBJECT: DurableObjectNamespace;
-	//
-	// Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
-	// MY_BUCKET: R2Bucket;
+  // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
+  // MY_KV_NAMESPACE: KVNamespace;
+  //
+  // Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
+  // MY_DURABLE_OBJECT: DurableObjectNamespace;
+  //
+  // Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
+  // MY_BUCKET: R2Bucket;
 }
 
-export default {
-	async fetch(
-		request: Request,
-		env: Env,
-		ctx: ExecutionContext
-	): Promise<Response> {
-		return new Response("Hello World!");
-	},
-};
+addEventListener("fetch", (event) => {
+  console.log({ event });
+  event.respondWith(handleEvent(event));
+});
+
+async function handleEvent(event: FetchEvent): Promise<Response> {
+  const { request } = event;
+
+  const posts = await prisma.post.findMany();
+
+  return new Response(JSON.stringify(posts), {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
