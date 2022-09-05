@@ -1,9 +1,12 @@
 import { Router } from "itty-router";
 
-import { getArticlesController } from "./modules/article/article.controller";
+import { loginHandler } from "./modules/auth/auth.controller";
+import { getPostsController } from "./modules/post/post.controller";
 
 const router = Router();
 
-router.get("/articles", getArticlesController);
+router.post("/auth/login", loginHandler);
+
+router.get("/posts", getPostsController);
 
 export default router;

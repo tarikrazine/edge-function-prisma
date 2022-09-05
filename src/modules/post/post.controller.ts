@@ -1,10 +1,10 @@
-import { prisma } from "../../utils/prisma";
+import { getPosts } from "./post.service";
 
-export async function getArticlesController(
+export async function getPostsController(
   request: Request,
   event: FetchEvent
 ): Promise<Response> {
-  const posts = await prisma.post.findMany();
+  const posts = await getPosts();
 
   return new Response(JSON.stringify(posts), {
     headers: {

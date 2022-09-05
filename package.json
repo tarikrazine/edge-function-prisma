@@ -1,5 +1,5 @@
 {
-  "name": "primsa-at-adge-function",
+  "name": "prisma-at-edge-function",
   "version": "0.0.0",
   "devDependencies": {
     "@cloudflare/workers-types": "^3.16.0",
@@ -10,7 +10,9 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev --local",
-    "deploy": "wrangler publish"
+    "deploy": "wrangler publish",
+    "generate-client": "prisma generate --data-proxy",
+    "migrate": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "4.3.1",
