@@ -10,9 +10,7 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev --local",
-    "deploy": "wrangler publish",
-    "generate-client": "prisma generate --data-proxy",
-    "migrate": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy"
+    "deploy": "wrangler publish"
   },
   "dependencies": {
     "@prisma/client": "4.3.1",
