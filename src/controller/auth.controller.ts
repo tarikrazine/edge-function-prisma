@@ -1,3 +1,5 @@
+import { createUser } from "../service/auth.service";
+
 export async function signUpHandler(
   request: Request,
   event: FetchEvent
@@ -12,7 +14,17 @@ export async function signUpHandler(
     return new Response("Password must not be empty!");
   }
 
-  return new Response("good");
+  try {
+    const user = await createUser({ name, email, password });
+
+    if (user) {
+      return new Response("User already existing!");
+    }
+  } catch (error) {
+    console.log(error);
+
+    return new Response("Something went wrong!");
+  }
 }
 
 export async function signInHandler(

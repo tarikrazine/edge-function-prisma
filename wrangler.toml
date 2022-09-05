@@ -1,3 +1,7 @@
 name = "prisma-at-edge-function"
 main = "src/index.ts"
 compatibility_date = "2022-09-04"
+
+[vars]
+DATABASE_URL = "prisma://aws-eu-central-1.prisma-data.com/?api_key=MEY3RDtggEnI5Hz8ObSsxd4UQ7h_sOtFriASoxJbVf4Un62J_ppXbIHuKljQssFx"
+MIGRATE_DATABASE_URL = "postgresql://postgres:uhZEMmc1jpWq6SZv@db.bgnoippxnpotcqxhssin.supabase.co:5432/postgres"

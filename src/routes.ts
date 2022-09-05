@@ -1,7 +1,7 @@
 import { Router } from "itty-router";
 
-import { signUpHandler, signInHandler } from "./modules/auth/auth.controller";
-import { getPostsController } from "./modules/post/post.controller";
+import { signUpHandler, signInHandler } from "./controller/auth.controller";
+import { getPostsController } from "./controller/post.controller";
 
 const router = Router();
 
