@@ -4,6 +4,7 @@ export async function getPostsController(
   request: Request,
   event: FetchEvent
 ): Promise<Response> {
+  console.log(request.user);
   try {
     const posts = await getPosts();
 

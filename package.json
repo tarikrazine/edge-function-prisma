@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "devDependencies": {
     "@cloudflare/workers-types": "^3.16.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie": "^0.5.1",
+    "@types/node": "^18.7.15",
     "prisma": "^4.3.1",
     "typescript": "^4.8.2",
     "wrangler": "2.0.28"
@@ -14,6 +17,10 @@
   },
   "dependencies": {
     "@prisma/client": "4.3.1",
+    "@tsndr/cloudflare-worker-jwt": "^2.0.1",
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.5.0",
+    "http-status-codes": "^2.2.0",
     "itty-router": "^2.6.1",
     "itty-router-extras": "^0.4.2"
   }
