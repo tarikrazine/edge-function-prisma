@@ -4,6 +4,7 @@ import { serialize } from "cookie";
 
 import { createUser, findUser } from "../service/auth.service";
 import { signJwt } from "../utils/jwt";
+import omit from "../helpers/omit";
 
 export async function signUpHandler(
   request: Request,
@@ -14,6 +15,14 @@ export async function signUpHandler(
     email: string;
     password: string;
   };
+
+  const user = await findUser(email);
+
+  if (user) {
+    return new Response("User already exists", {
+      status: StatusCodes.CONFLICT,
+    });
+  }
 
   if (typeof email !== "string") {
     return new Response("Email must not be empty!", {
@@ -32,18 +41,15 @@ export async function signUpHandler(
   try {
     const user = await createUser({ name, email, password: hashPassword });
 
-    return new Response(JSON.stringify(user), {
+    const omitUser = omit(user, ["password", "createdAt", "updatedAt"]);
+
+    return new Response(JSON.stringify(omitUser), {
       status: StatusCodes.CREATED,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error: any) {
-    if (error.code === 11000) {
-      return new Response("User already exists", {
-        status: StatusCodes.CONFLICT,
-      });
-    }
     console.log(error);
 
     return new Response("Something went wrong!", {
@@ -87,11 +93,10 @@ export async function signInHandler(
     });
   }
 
-  console.log("isValid");
-
   const token = await signJwt({
     id: user.id,
     email: user.email,
+    name: user?.name,
   });
 
   return new Response(token, {

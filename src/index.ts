@@ -7,6 +7,8 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+import { StatusCodes } from "http-status-codes";
+
 import router from "./routes";
 
 export interface Env {
@@ -20,6 +22,13 @@ export interface Env {
   // MY_BUCKET: R2Bucket;
 }
 
-addEventListener("fetch", (event) => {
-  event.respondWith(router.handle(event.request, event));
+const errorHandler = () =>
+  new Response("Not found!", {
+    status: StatusCodes.NOT_FOUND,
+  });
+
+addEventListener("fetch", (event, ...args) => {
+  event.respondWith(
+    router.handle(event.request, event, ...args).catch(errorHandler)
+  );
 });

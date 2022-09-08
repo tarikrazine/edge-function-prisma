@@ -8,13 +8,11 @@ export async function deserializeUser(request: Request, event: FetchEvent) {
 
   const isValid = await verifyJwt(token);
 
-  if (!isValid) {
-    return new Response("Access denied!");
-  }
+  if (isValid) {
+    const decode = decodeJwt(token);
 
-  const decode = decodeJwt(token);
-
-  if (decode) {
-    request.user = decode.payload;
+    if (decode) {
+      request.user = decode.payload;
+    }
   }
 }
