@@ -2,3 +2,7 @@ name = "prisma-at-edge-function"
 main = "src/index.ts"
 compatibility_date = "2022-09-04"
 node_compat = true
+
+kv_namespaces = [
+    { binding = "POSTS", id = "a1504dc48d58429a99d918b6f3dc5f2e20", preview_id = "202a597748a99341c8aae43cb32bef06da" }
+]

@@ -22,7 +22,7 @@ router.get("/post/:id", getPostController);
 router.get(
   "/me",
   requireUser,
-  (request: Request) =>
+  (request: Request, event: FetchEvent) =>
     new Response(JSON.stringify(request.user), {
       status: StatusCodes.OK,
       headers: {
