@@ -4,7 +4,9 @@ import { Router } from "itty-router";
 import { signUpHandler, signInHandler } from "./controller/auth.controller";
 import {
   getPostController,
+  getPostRevalidateController,
   getPostsController,
+  getPostsRevalidateController,
 } from "./controller/post.controller";
 import { deserializeUser } from "./utils/deserializeUser";
 import { requireUser } from "./utils/requireUser";
@@ -17,7 +19,8 @@ router.post("/auth/signup", signUpHandler);
 router.post("/auth/signin", signInHandler);
 
 router.get("/posts", getPostsController);
-router.get("/post/:id", getPostController);
+router.get("/posts/:id", getPostController);
+router.post("/posts/revalidate", getPostsRevalidateController);
 
 router.get(
   "/me",
